@@ -1,5 +1,6 @@
 require("dotenv").config();
-
+var moment = require('moment');
+let fs = require('fs')
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify({
@@ -14,7 +15,7 @@ let artistName = "";
 let movieInput = ""
 
 let command = process.argv[2]
-console.log(process.argv)
+
 
     if (command === "concert-this") {
         console.log("if statement here")
@@ -26,12 +27,20 @@ console.log(process.argv)
         spotifyAPI()
         return;
     }
+    if (command === "movie-this" & !process.argv[3]) {
+      defaultomdbAPI()
+      return;
+    }
     if (command === "movie-this") {
         console.log("omdb if statement here")
         omdbAPI()
         return;
     }
-
+    if (command === "do-what-it-says") {
+      defaultSpotifyAPI()
+      return;
+    }
+    
 // Band In Town API Manipulation :
 
 function bandInTownAPI() {
@@ -47,15 +56,18 @@ axios
 .get("https://rest.bandsintown.com/artists/"+newArtistName+"/events?app_id=codingbootcamp")
   .then(function(response) {
     for (let i = 1; i < 6; i++) {
+    
     nameOfVenue = (response.data[i].venue.name);
     locationOfVenue = (response.data[i].venue.country + ", " + response.data[i].venue.city)
     dateOfVenue = (response.data[i].datetime)
-    console.log("-----------------------------")
-    console.log("Details to Event #" +[i])
+    dateOfVenues = moment(dateOfVenue).format("MM/DD/YYYY hh:mm a");
+
+    console.log("----------------------")
+    console.log("Details to Concert #" +[i])
     console.log("Event name:  " +nameOfVenue)
     console.log("Event location:  " +locationOfVenue)
-    console.log("Event date:  " +dateOfVenue)
-    console.log("-----------------------------")
+    console.log("Event date:  " +dateOfVenues)
+    console.log("----------------------")
     }
     })
     .catch(function(error) {
@@ -92,11 +104,14 @@ function spotifyAPI() {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
-        console.log(data.tracks.items[0])
-      console.log(data.tracks.items[0].artists[0].name);
-      console.log(data.tracks.items[0].name)
+        console.log("Your Song:")
+      console.log("The artist of this song is: " +data.tracks.items[0].artists[0].name);
+      console.log("----------------------")
+      console.log("The song's name is: " +data.tracks.items[0].name)
+      console.log("----------------------")
       console.log(data.tracks.items[0].external_urls)
-      console.log(data.tracks.items[0].album.name)
+      console.log("----------------------")
+      console.log("Album's name: " +data.tracks.items[0].album.name)
       });
 
     }
@@ -109,20 +124,84 @@ function omdbAPI() {
 axios.get("http://www.omdbapi.com/?t="+movieInput+"&y=&plot=short&apikey=trilogy")
 .then(function(response) {
 
-   console.log(movieInput)
-   console.log(response.data.Title);
-   console.log(response.data.Year);
-   console.log(response.data.imdbRating)
-   console.log(response.data.Ratings[1])
-   console.log(response.data.Country)
-   console.log(response.data.Language)
-   console.log(response.data.Plot)
-   console.log(response.data.Actors)
+  console.log("----- Movie Stats: -----")
+    console.log("Movie name: " +response.data.Title);
+    console.log("----------------------")
+    console.log("Movie year: " +response.data.Year);
+    console.log("----------------------")
+    console.log("IMDB movie rating: " +response.data.imdbRating)
+    console.log("----------------------")
+    console.log("Rotten Tomato rating: ") + console.log(response.data.Ratings[1])
+    console.log("----------------------")
+    console.log("All country's this movie is in: " +response.data.Country)
+    console.log("----------------------")
+    console.log("All languages this movie is in: " +response.data.Language)
+    console.log("----------------------")
+    console.log("Movie plot: " +response.data.Plot)
+    console.log("----------------------")
+    console.log("Main actors/actresses in this movie: " +response.data.Actors)
 
 }) //will get information from omdb api and console.log all information that was retrieved
 .catch(function(error) {
    if (error.request){
-       console.log(error.request)
+      //  console.log(error.request)
    }
 });
 }
+
+function defaultomdbAPI() {
+  let movieInput = "Mr. Nobody"
+  axios.get("http://www.omdbapi.com/?t="+movieInput+"&y=&plot=short&apikey=trilogy")
+.then(function(response) {
+    console.log("----- Movie Stats: -----")
+    console.log("Movie name: " +response.data.Title);
+    console.log("----------------------")
+    console.log("Movie year: " +response.data.Year);
+    console.log("----------------------")
+    console.log("IMDB movie rating: " +response.data.imdbRating)
+    console.log("----------------------")
+    console.log("Rotten Tomato rating: ") + console.log(response.data.Ratings[1])
+    console.log("----------------------")
+    console.log("All country's this movie is in: " +response.data.Country)
+    console.log("----------------------")
+    console.log("All languages this movie is in: " +response.data.Language)
+    console.log("----------------------")
+    console.log("Movie plot: " +response.data.Plot)
+    console.log("----------------------")
+    console.log("Main actors/actresses in this movie: " +response.data.Actors)
+
+})
+}
+function defaultSpotifyAPI(){
+let spotifySong = ""
+  fs.readFile('random.txt', 'utf8', function(error, data) {
+    if (error) {
+        return console.log(error)
+    }
+  spotifySong = data.split(',')[1];
+
+  
+spotify.search({ type: 'track', query: spotifySong }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
+
+console.log("----- Default Song Search: -----")
+console.log("The artist of this song is: " +data.tracks.items[0].artists[0].name);
+console.log("----------------------")
+console.log("The song's name is: " +data.tracks.items[0].name)
+console.log("----------------------")
+console.log(data.tracks.items[0].external_urls)
+console.log("----------------------")
+console.log("Album's name: " +data.tracks.items[0].album.name)
+});
+
+  
+})
+
+}
+
+
+//spotify Delicate
+//concert-this Rascal Flatts
+//movie-this Pulp Fiction
