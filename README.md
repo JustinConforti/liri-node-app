@@ -58,8 +58,20 @@ https://screenshot.net/p62nncz
 
 do-what-it-says from random.txt file: 
 https://screenshot.net/lkgjjb9
+
+Technologies Used: 
+	
+	NodeJS
+	Axios
+	Moment (Time format)
+	Spotify API
+	Band In Town API
+	OMDB API
+	dotenv
+	readme-md-generator (created this pretty readme file)
+	
 		
-		 
+	I created, developed, and manage this Liri App. Big thanks to all TA's and instructors as well as classmates that helped along the way!
 		 
 
 ### 🏠 [Homepage](https://github.com/JustinConforti/liri-node-app#readme)
