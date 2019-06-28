@@ -43,6 +43,18 @@ Liri will perform these different actions using simple command words: "concert-t
 	4. As a default if you use the "do-what-it-says" command, it will read the text from the random.txt file and perform the search
 		* This command will read the file text and run the correct function 
 			
+
+
+**** Links to examples of each command, ran in VS Code Git Bash terminal ****
+
+Concert-this Rascal Flatts: 
+https://screenshot.net/l20llcv
+
+Spotify-this-song Delicate: 
+https://screenshot.net/r3n88cv
+
+Movie-this Pulp Fiction:
+https://screenshot.net/p62nncz
 		
 		 
 		 

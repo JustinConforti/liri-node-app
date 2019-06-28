@@ -45,16 +45,14 @@ let command = process.argv[2]
 
 function bandInTownAPI(command) {
 
-  if(argument[0]) {
-    newArtistName = command
-  } else{
+  
     for (let i = 3; i < process.argv.length; i++) {
         artistName += process.argv[i] + " "
     }
     console.log(artistName)
     let newArtistName = artistName.trim()
     console.log(newArtistName)
-  }
+  
 
 axios
 .get("https://rest.bandsintown.com/artists/"+newArtistName+"/events?app_id=codingbootcamp")
@@ -184,27 +182,8 @@ let spotifySong = ""
     }
 
     let command = data.split(",")[0]
-    let secondCommand = data.split(",")[1]
+    let spotifySong = data.split(",")[1]
 
-    if (command === "concert-this") {
-      console.log("if statement here")
-     bandInTownAPI(command)
-      return;
-  }
-  if (command === "spotify-this-song") {
-      console.log("spotify if statement here")
-      spotifyAPI(command)
-      return;
-  }
-  if (command === "movie-this" & !process.argv[3]) {
-    defaultomdbAPI(command)
-    return;
-  }
-  if (command === "movie-this") {
-      console.log("omdb if statement here")
-      omdbAPI(command)
-      return;
-  }
   
 spotify.search({ type: 'track', query: spotifySong }, function(err, data) {
   if (err) {
