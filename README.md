@@ -12,10 +12,40 @@
   </a>
 </p>
 
-> This simple App will perform different actions using simple command words: 
+
+> LIRI is a one stop APP that will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
+Liri will perform these different actions using simple command words: "concert-this", "spotify-this-song", "movie-this", "do-what-it-says"
 	
-	1. Search any bands concert dates using the command "concert-this" + bandname
-		*
+	1. Search any band's concert dates using the command <"concert-this"> <"band name"> format:
+		* This command will manipulate information from the Band In Town API depending on what band name you searched, it will display: 
+			- Venue name 
+			- Country the venue is located
+			- Time and Date (MM/DD/YYYY) of the five most recent concerts
+	
+	2. Search spotify using the command <"spotify-this-song"> <"artist/song"> format:
+		* This command will manipulate information from Spotify's API depending on what artist/song you searched, it will display:
+			- Artist name
+			- Song name
+			- External url of the song link
+			- Album name the song is on (if any)
+
+	3. Search OMDB using the command <"movie-this"> <"movie name"> format:
+		* This command will manipulate information from OMDB's API depending on what movie you searched, it will display: 
+			- Movie title
+			- Movie year
+			- IMDB movie rating
+			- Rotten Tomato movie rating
+			- Countries that the movie was released in
+			- All languages the movie was created in
+			- A short movie plot
+			- Main actors/actress in the movie
+
+	4. As a default if you use the "do-what-it-says" command, it will read the text from the random.txt file and perform the search
+		* This command will read the file text and run the correct function 
+			
+		
+		 
+		 
 
 ### 🏠 [Homepage](https://github.com/JustinConforti/liri-node-app#readme)
 
