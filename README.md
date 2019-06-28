@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Liri Command Prompt App 👋</h1>
+﻿<h1 align="center">Welcome to Liri Command Prompt App 👋</h1>
 <p>
   <img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/JustinConforti/liri-node-app#readme">
@@ -12,21 +12,13 @@
   </a>
 </p>
 
-> A command prompt used to seach different fields:
+> This simple App will perform different actions using simple command words: 
+	
+	1. Search any bands concert dates using the command "concert-this" + bandname
+		*
 
 ### 🏠 [Homepage](https://github.com/JustinConforti/liri-node-app#readme)
 
-## Install
-
-```sh
-npm install
-```
-
-## Run tests
-
-```sh
-npm run test
-```
 
 ## Author
 
